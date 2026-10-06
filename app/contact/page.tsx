@@ -17,7 +17,7 @@ export default function ContactPage() {
           <h1 className="mt-4 font-display text-5xl font-extrabold leading-[0.9] tracking-tight md:text-7xl">
             Start a <br />
             project. <br />
-            <span className="text-orange">We're listening.</span>
+            <span className="text-orange">We&apos;re listening.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink-soft">
             Send a file or sketch for 3D printing, rapid prototyping, laser cutting, or product design. Quote within 24 hours.
@@ -33,7 +33,7 @@ export default function ContactPage() {
               The brief
             </h2>
             <p className="mt-1 font-mono text-xs uppercase tracking-widest text-ink-soft">
-              // fields marked * are required
+              Fields marked * are required
             </p>
             <div className="mt-8">
               <ContactForm />
@@ -45,7 +45,7 @@ export default function ContactPage() {
             <div className="brut-card !bg-yellow p-6">
               <h3 className="font-display text-2xl font-extrabold">First time printing?</h3>
               <p className="mt-2 text-sm">
-                Not sure what process you need? Mention what the part has to <em>do</em> and we'll suggest a route. We do free DFM reviews on every quote.
+                Not sure what process you need? Mention what the part has to <em>do</em> and we&apos;ll suggest a route. We do free DFM reviews on every quote.
               </p>
               <Link href="/services" className="brut-btn brut-btn--dark mt-4">See processes →</Link>
             </div>
@@ -70,7 +70,7 @@ export default function ContactPage() {
             </dl>
 
             <div className="brut-card !bg-mint p-6">
-              <p className="font-mono text-xs uppercase tracking-widest">// quick contact</p>
+              <p className="font-mono text-xs uppercase tracking-widest">Quick contact</p>
               <p className="mt-2 font-display text-2xl font-extrabold leading-tight">
                 Most small FDM prints ship in about 2 days; larger jobs confirmed in your quote.
               </p>

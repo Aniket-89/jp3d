@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-16 md:px-8">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-yellow">// project notes</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-yellow">Project notes</p>
             <h3 className="mt-3 font-display text-4xl font-extrabold leading-[0.95] md:text-5xl">
               Occasional notes <br />
               <span className="text-yellow">from Extrudia.</span>

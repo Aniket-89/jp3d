@@ -6,7 +6,7 @@ export default function TermsPage() {
       <div className="mt-8 brut-card p-6 md:p-8">
         <p className="font-mono text-sm uppercase tracking-widest">TODO: Complete before publishing</p>
         <p className="mt-4 text-base text-ink-soft">
-          Add Extrudia's approved terms for quotes, payment, project changes, cancellations, design and file ownership, liability, delivery, and shipping. Do not publish this placeholder as final terms.
+          Add Extrudia&apos;s approved terms for quotes, payment, project changes, cancellations, design and file ownership, liability, delivery, and shipping. Do not publish this placeholder as final terms.
         </p>
       </div>
     </article>

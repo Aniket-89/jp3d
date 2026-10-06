@@ -115,7 +115,7 @@ export default function ContactForm() {
 
       <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
         <p className="font-mono text-xs uppercase tracking-widest text-ink-soft">
-          // Quote within 24 hours · Delivery and shipping only
+          Quote within 24 hours · Delivery and shipping only
         </p>
         <button type="submit" disabled={status === "loading"} className="brut-btn brut-btn--orange">
           {status === "loading" ? "Sending…" : "Send brief →"}

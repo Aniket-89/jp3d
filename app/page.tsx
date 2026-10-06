@@ -173,7 +173,7 @@ function Process() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-col gap-3">
           <span className="brut-tag !bg-yellow !border-paper !shadow-[3px_3px_0_0_var(--color-paper)]">
-            // The process
+            The process
           </span>
           <h2 className="font-display text-4xl font-extrabold leading-[0.95] md:text-6xl">
             File to finished part <br />
@@ -217,7 +217,7 @@ function WhyUs() {
             title={
               <>
                 We treat your part <br />
-                like it's <em className="not-italic text-orange">our</em> part.
+                like it is <em className="not-italic text-orange">our</em> part.
               </>
             }
             subtitle="A small prototyping studio with personal attention, practical material advice, fast quotes, and design help."
@@ -309,7 +309,7 @@ function CTABand() {
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-5 py-16 md:flex-row md:items-center md:justify-between md:px-8 md:py-24">
         <h2 className="font-display text-4xl font-extrabold leading-[0.95] md:text-6xl">
           Got a file or sketch? <br />
-          Let's prototype it.
+          Let&apos;s prototype it.
         </h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/contact" className="brut-btn brut-btn--dark">
