@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { services } from "@/lib/data";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -26,21 +27,37 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JP 3D Prints — Industrial-grade 3D printing & prototyping",
+  title: "Extrudia | 3D Printing & Rapid Prototyping in Ghaziabad",
   description:
-    "FDM, SLA & SLS 3D printing for engineers, makers and brands. Upload a file, get a quote in 24h, hold the part in your hand by next week.",
-  metadataBase: new URL("https://jp3dprints.example.com"),
+    "Extrudia offers 3D printing, rapid prototyping, laser cutting, and product design in Sahibabad, Ghaziabad. Upload a file for a quote.",
   openGraph: {
-    title: "JP 3D Prints",
-    description: "Print it. Prototype it. Ship it.",
+    title: "Extrudia | 3D Printing & Rapid Prototyping in Ghaziabad",
+    description:
+      "Extrudia offers 3D printing, rapid prototyping, laser cutting, and product design in Sahibabad, Ghaziabad. Upload a file for a quote.",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Extrudia | 3D Printing & Rapid Prototyping in Ghaziabad",
+    description:
+      "Extrudia offers 3D printing, rapid prototyping, laser cutting, and product design in Sahibabad, Ghaziabad. Upload a file for a quote.",
+  },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Extrudia",
+  email: "hello.extrudia@gmail.com",
+  areaServed: ["Sahibabad", "Ghaziabad", "Noida", "Greater Noida", "Delhi NCR", "India"],
+  services: services.map((service) => service.name),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body className="min-h-screen text-ink antialiased">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-yellow focus:px-3 focus:py-2 focus:border-[3px] focus:border-ink"

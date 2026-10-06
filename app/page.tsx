@@ -1,20 +1,28 @@
 import Link from "next/link";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
+import Image from "next/image";
+import GalleryImage from "@/components/GalleryImage";
 import SectionHeading from "@/components/SectionHeading";
 import Marquee from "@/components/Marquee";
-import { techs, processSteps, whyUs, projects, stats } from "@/lib/data";
+import { processSteps, projects, services, whyUs, fdmMaterials } from "@/lib/data";
+import { whatsappUrl } from "@/lib/config";
+
+const serviceToneClasses = {
+  yellow: "bg-yellow",
+  orange: "bg-orange",
+  mint: "bg-mint",
+  blue: "bg-blue",
+};
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <StatStrip />
       <Services />
       <Process />
-      <Marquee items={["PLA", "PETG", "ABS", "Nylon PA12", "TPU 95A", "Resin Tough", "Castable Wax", "PA-GF", "Polycarbonate", "ASA"]} />
+      <Marquee items={[...fdmMaterials, "Wood", "Acrylic", "Metal engraving"]} />
       <WhyUs />
       <ProjectsTeaser />
-      <Testimonial />
+      {/* TODO: Add real testimonials when available. */}
       <CTABand />
     </>
   );
@@ -30,9 +38,9 @@ function Hero() {
           <div className="flex flex-wrap items-center gap-2">
             <span className="brut-tag">
               <span className="h-2 w-2 animate-pulse bg-mint" />
-              Studio open · taking orders
+              Sahibabad · Ghaziabad
             </span>
-            <span className="brut-tag !bg-yellow">FDM · SLA · SLS</span>
+            <span className="brut-tag !bg-yellow">FDM · Prototyping · Laser</span>
           </div>
           <h1 className="mt-6 font-display text-[clamp(2.8rem,8vw,6.5rem)] font-extrabold leading-[0.9] tracking-tight">
             Print it.<br />
@@ -43,7 +51,13 @@ function Hero() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-ink-soft">
-            <span className="font-bold text-ink">JP 3D Prints</span> is a small studio for engineers, makers and brands who refuse to wait weeks for a part. Drop in a CAD file, get a quote in 24h, hold it in your hand next week.
+            Extrudia is a small prototyping studio in Sahibabad, Ghaziabad for 3D printing, laser cutting, and product design. Send a file or a sketch and get a quote within 24 hours.
+          </p>
+          <p className="mt-3 max-w-xl text-sm text-ink-soft">
+            Quote within 24 hours. Most small FDM prints ship in about 2 days; larger jobs confirmed in your quote.
+          </p>
+          <p className="mt-2 max-w-xl text-sm text-ink-soft">
+            Delivery across Delhi NCR and tracked shipping across India.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link href="/contact" className="brut-btn">
@@ -53,9 +67,11 @@ function Hero() {
             <Link href="/services" className="brut-btn brut-btn--ghost">
               See capabilities
             </Link>
-            <span className="font-mono text-xs uppercase tracking-widest text-ink-soft">
-              · 24h quote · NDA on request
-            </span>
+            {whatsappUrl && (
+              <a href={whatsappUrl} className="brut-btn brut-btn--ghost" target="_blank" rel="noopener noreferrer">
+                WhatsApp
+              </a>
+            )}
           </div>
         </div>
 
@@ -63,32 +79,26 @@ function Hero() {
           {/* main hero "build plate" card */}
           <div className="brut-card relative aspect-[5/6] !p-0 overflow-hidden">
             <div className="absolute inset-0 layer-lines opacity-60" aria-hidden />
-            <ImagePlaceholder
+            {/* <ImagePlaceholder
               tone="paper"
               pattern="iso"
               aspect="aspect-[5/6]"
               label="HERO · STUDIO SHOT"
               caption="Drop in a hero photo of a printer mid-print or a hero part."
               className="!border-0 !shadow-none"
+            /> */}
+            <Image
+              src="/images/printer-warmlight.jpg"
+              alt="Hero shot of a 3D printer build plate with a part mid-print."
+              width={500}
+              height={600}
+              className="h-full w-full object-cover"
             />
             {/* z-axis arrow */}
             <div className="pointer-events-none absolute right-3 top-3 flex flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-widest">
               <span>Z</span>
               <span className="h-16 w-[2px] bg-ink" />
               <span>▲</span>
-            </div>
-          </div>
-
-          {/* floating spec card */}
-          <div className="absolute -left-3 bottom-6 hidden w-56 -rotate-3 border-[3px] border-ink bg-yellow p-4 shadow-[6px_6px_0_0_var(--color-ink)] md:block">
-            <div className="font-mono text-[10px] uppercase tracking-widest">Live build</div>
-            <div className="mt-1 font-display text-2xl font-extrabold leading-none">Layer 187/240</div>
-            <div className="mt-3 h-2 w-full border-2 border-ink bg-paper">
-              <div className="h-full w-[78%] bg-orange" />
-            </div>
-            <div className="mt-2 flex justify-between font-mono text-[10px]">
-              <span>78%</span>
-              <span>est. 47min</span>
             </div>
           </div>
 
@@ -105,22 +115,6 @@ function Hero() {
   );
 }
 
-/* ───── STAT STRIP ───── */
-function StatStrip() {
-  return (
-    <section className="border-y-[3px] border-ink bg-paper">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x-[3px] divide-ink md:grid-cols-4">
-        {stats.map((s, i) => (
-          <div key={i} className="px-5 py-6 md:px-8 md:py-8">
-            <div className="font-display text-3xl font-extrabold md:text-5xl">{s.value}</div>
-            <div className="mt-1 font-mono text-[11px] uppercase tracking-widest text-ink-soft">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 /* ───── SERVICES ───── */
 function Services() {
   return (
@@ -129,40 +123,38 @@ function Services() {
         kicker="What we run"
         title={
           <>
-            Three processes. <br />
-            <span className="text-stroke">One studio.</span>
+            Four services. <br />
+            <span className="text-stroke">One prototyping studio.</span>
           </>
         }
-        subtitle="Each technology earns its place. We help you pick the right one for the part you're trying to make — not the one we're trying to sell."
+        subtitle="3D printing, rapid prototyping, laser cutting, and product design in Sahibabad, Ghaziabad."
       />
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {techs.map((t, i) => (
+      <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {services.map((service, i) => (
           <article
-            key={t.id}
+            key={service.id}
             className="brut-card group flex flex-col gap-4 p-6"
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <div className="flex items-start justify-between gap-3">
-              <span className="brut-tag">{t.code}</span>
+              <span className="brut-tag">{service.code}</span>
               <div
-                className={`h-12 w-12 border-[3px] border-ink shadow-[3px_3px_0_0_var(--color-ink)] ${
-                  t.tone === "yellow" ? "bg-yellow" : t.tone === "orange" ? "bg-orange" : "bg-mint"
-                }`}
+                className={`h-12 w-12 border-[3px] border-ink shadow-[3px_3px_0_0_var(--color-ink)] ${serviceToneClasses[service.tone]}`}
               />
             </div>
-            <h3 className="font-display text-3xl font-extrabold leading-none">{t.name}</h3>
-            <p className="text-sm text-ink-soft">{t.tagline}</p>
+            <h3 className="font-display text-2xl font-extrabold leading-tight">{service.name}</h3>
+            <p className="text-sm text-ink-soft">{service.tagline}</p>
             <ul className="mt-1 flex flex-col gap-1 font-mono text-[11px] uppercase tracking-wider text-ink-soft">
-              {t.highlights.map((h) => (
-                <li key={h} className="flex gap-2">
+              {service.details.slice(0, 2).map((detail) => (
+                <li key={detail} className="flex gap-2">
                   <span className="text-orange">→</span>
-                  {h}
+                  {detail}
                 </li>
               ))}
             </ul>
             <Link
-              href={`/services#${t.id}`}
+              href={`/services#${service.id}`}
               className="mt-auto inline-flex items-center gap-2 self-start border-b-2 border-ink pb-1 font-bold uppercase tracking-wide text-sm group-hover:text-orange"
             >
               Read more <span aria-hidden>→</span>
@@ -228,7 +220,7 @@ function WhyUs() {
                 like it's <em className="not-italic text-orange">our</em> part.
               </>
             }
-            subtitle="Small enough that the person printing your file is also the one who quoted it. Big enough to take on a 200-piece run without flinching."
+            subtitle="A small prototyping studio with personal attention, practical material advice, fast quotes, and design help."
           />
         </div>
         <ul className="grid gap-5 sm:grid-cols-2">
@@ -249,10 +241,10 @@ function Glyph({ name }: { name: string }) {
   // simple inline icons keep the bundle light and on-brand
   const common = "h-7 w-7";
   switch (name) {
-    case "calipers":
+    case "people":
       return (
         <svg viewBox="0 0 24 24" className={common} stroke="currentColor" strokeWidth="2.2" fill="none">
-          <path d="M4 4h6v16H4zM14 4h6v16h-6zM10 8h4M10 16h4" />
+          <circle cx="9" cy="8" r="3" /><circle cx="17" cy="9" r="2" /><path d="M3 20v-2a6 6 0 0 1 12 0v2M15 15a4 4 0 0 1 6 3v2" />
         </svg>
       );
     case "clock":
@@ -262,14 +254,14 @@ function Glyph({ name }: { name: string }) {
           <path d="M12 8v5l3 2M9 3h6" />
         </svg>
       );
-    case "stack":
+    case "materials":
       return (
         <svg viewBox="0 0 24 24" className={common} stroke="currentColor" strokeWidth="2.2" fill="none">
           <path d="M12 3l9 5-9 5-9-5 9-5z" />
           <path d="M3 13l9 5 9-5M3 18l9 5 9-5" />
         </svg>
       );
-    case "leaf":
+    case "design":
       return (
         <svg viewBox="0 0 24 24" className={common} stroke="currentColor" strokeWidth="2.2" fill="none">
           <path d="M4 20c0-9 7-16 16-16-1 9-7 16-16 16z" />
@@ -283,62 +275,27 @@ function Glyph({ name }: { name: string }) {
 
 /* ───── PROJECTS TEASER ───── */
 function ProjectsTeaser() {
-  const tones = ["yellow", "mint", "orange", "blue", "rose", "paper"] as const;
+  const printProjects = projects.filter((project) => project.category === "Prints").slice(0, 3);
   return (
     <section className="border-t-[3px] border-ink bg-paper py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            kicker="Out of the studio"
+            kicker="Gallery"
             title={<>Recent <span className="text-orange">prints.</span></>}
-            subtitle="A small slice of what's gone out the door this quarter. Click through for the full gallery."
+            subtitle="Add project photos as work is ready to share."
           />
           <Link href="/gallery" className="brut-btn brut-btn--dark">
             View all →
           </Link>
         </div>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.slice(0, 6).map((p, i) => (
-            <figure key={p.title} className="brut-card group !p-0 overflow-hidden">
-              <ImagePlaceholder
-                tone={tones[i % tones.length]}
-                pattern={i % 2 === 0 ? "iso" : "hex"}
-                label={p.category}
-                caption={p.caption}
-                className="!border-0 !shadow-none"
-              />
-              <figcaption className="border-t-[3px] border-ink bg-paper px-4 py-3">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">{p.category}</div>
-                <div className="font-display text-lg font-extrabold leading-tight">{p.title}</div>
-              </figcaption>
+          {printProjects.map((project, index) => (
+            <figure key={`print-${index}`} className="brut-card group !p-0 overflow-hidden">
+              <GalleryImage src={project.src} alt={project.alt} />
             </figure>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ───── TESTIMONIAL ───── */
-function Testimonial() {
-  return (
-    <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
-      <div className="brut-card relative p-8 md:p-14">
-        <div className="absolute -top-4 left-8 brut-tag !bg-orange !text-paper">// from the inbox</div>
-        <blockquote className="max-w-4xl font-display text-2xl font-extrabold leading-tight md:text-4xl">
-          “Sent over a STEP file Monday morning. Held the part Wednesday. The finish was better than what we were getting from our previous shop at half the lead time. JP is now the only call we make.”
-        </blockquote>
-        <figcaption className="mt-8 flex items-center gap-4">
-          <div className="grid h-14 w-14 place-items-center border-[3px] border-ink bg-mint font-display text-2xl font-extrabold shadow-[3px_3px_0_0_var(--color-ink)]">
-            MK
-          </div>
-          <div>
-            <div className="font-display text-lg font-extrabold leading-none">Mira K.</div>
-            <div className="font-mono text-xs uppercase tracking-widest text-ink-soft">
-              Hardware lead · Anvil Robotics
-            </div>
-          </div>
-        </figcaption>
       </div>
     </section>
   );
@@ -351,8 +308,8 @@ function CTABand() {
       <div className="hex-infill absolute inset-0 opacity-60" aria-hidden />
       <div className="relative mx-auto flex max-w-7xl flex-col items-start gap-6 px-5 py-16 md:flex-row md:items-center md:justify-between md:px-8 md:py-24">
         <h2 className="font-display text-4xl font-extrabold leading-[0.95] md:text-6xl">
-          Got a file? <br />
-          We've got a build plate.
+          Got a file or sketch? <br />
+          Let's prototype it.
         </h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/contact" className="brut-btn brut-btn--dark">

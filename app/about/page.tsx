@@ -4,24 +4,13 @@ import ImagePlaceholder from "@/components/ImagePlaceholder";
 import SectionHeading from "@/components/SectionHeading";
 
 export const metadata: Metadata = {
-  title: "About — JP 3D Prints",
-  description: "Who runs the studio, the machines that run, and the principles we won't compromise on.",
+  title: "About — Extrudia",
+  description: "Extrudia is a rapid prototyping studio in Sahibabad, Ghaziabad, UP, India.",
 };
 
 const equipment = [
-  { name: "Bambu Lab X1C ×3", spec: "FDM · 256 × 256 × 256 mm", note: "Daily driver fleet." },
-  { name: "Prusa MK4S ×2", spec: "FDM · 250 × 210 × 220 mm", note: "Reliability, slow & steady." },
-  { name: "Voron 2.4 (350mm)", spec: "FDM · 350 × 350 × 350 mm", note: "Big parts, exotic filaments." },
-  { name: "Formlabs Form 4", spec: "SLA · 200 × 125 × 210 mm", note: "Workhorse resin printer." },
-  { name: "Phrozen Sonic Mega 8K", spec: "MSLA · 330 × 185 × 400 mm", note: "Large-scale models." },
-  { name: "Formlabs Fuse 1+ 30W", spec: "SLS · 165 × 165 × 300 mm", note: "Production nylon." },
-];
-
-const principles = [
-  { n: "01", t: "Quote what we'll deliver", d: "Fixed prices, fixed dates. If we can't hit them, we tell you upfront." },
-  { n: "02", t: "Print like an engineer", d: "Right orientation, right infill, right material — every time, not just on the hard ones." },
-  { n: "03", t: "Inspect every part", d: "Calipers and a checklist before anything ships. Photos on request." },
-  { n: "04", t: "Stay small enough to care", d: "The person printing your file is the one who quoted it. No call centers." },
+  { name: "Bambu Lab P2S", spec: "FDM · Up to 256 × 256 × 256 mm", note: "TODO: Confirm build volume." },
+  { name: "Two Trees TTS-20 Pro", spec: "Diode laser", note: "TODO: Confirm work area and maximum material thickness." },
 ];
 
 export default function AboutPage() {
@@ -37,43 +26,32 @@ export default function AboutPage() {
               <span className="text-stroke">make things.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-ink-soft">
-              JP 3D Prints started as one printer in a garage and a stubborn refusal to wait three weeks for a bracket. It's now a six-machine studio serving robotics teams, jewellers, indie product brands, and the occasional film studio.
+              Extrudia is a rapid prototyping studio in Sahibabad, Ghaziabad, UP, India. We work across 3D printing, laser cutting and engraving, and product/CAD design, serving projects across Delhi NCR.
             </p>
             <p className="mt-4 max-w-xl text-base text-ink-soft">
-              We're proudly small. Most jobs are quoted, printed and shipped by the same two people. That's a feature, not a bug.
+              Delivery across Delhi NCR and tracked shipping across India.
             </p>
           </div>
           <div className="relative">
             <ImagePlaceholder
               tone="yellow"
               pattern="iso"
-              label="STUDIO · WIDE"
-              caption="A wide shot of the studio (printers, parts wall, founders)."
+              label="ADD APPROVED PHOTO"
+              caption="TODO: Add an approved photo."
               aspect="aspect-[4/5]"
             />
-            <div className="absolute -bottom-4 -left-4 hidden -rotate-3 border-[3px] border-ink bg-paper p-3 shadow-[5px_5px_0_0_var(--color-ink)] md:block">
-              <div className="font-mono text-[10px] uppercase tracking-widest">est.</div>
-              <div className="font-display text-3xl font-extrabold leading-none">2022</div>
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Principles */}
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
         <SectionHeading
-          kicker="How we work"
-          title={<>Four rules. <br /><span className="text-orange">No exceptions.</span></>}
+          kicker="Our story"
+          title={<>Ideas take <br /><span className="text-orange">shape here.</span></>}
         />
-        <ol className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {principles.map((p) => (
-            <li key={p.n} className="brut-card p-6">
-              <div className="font-display text-5xl font-extrabold text-yellow">{p.n}</div>
-              <h3 className="mt-2 font-display text-xl font-extrabold leading-tight">{p.t}</h3>
-              <p className="mt-2 text-sm text-ink-soft">{p.d}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="mt-8 brut-card p-6 md:p-8">
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-soft">TODO: Add founder story.</p>
+        </div>
       </section>
 
       {/* Equipment */}
@@ -82,8 +60,8 @@ export default function AboutPage() {
           <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <SectionHeading
               kicker="The machines"
-              title={<>Six printers. <br /><span className="text-stroke">All work.</span></>}
-              subtitle="No vapourware. Every machine on this list runs jobs every week. If a part needs something we don't have, we'll say so."
+              title={<>The tools. <br /><span className="text-stroke">For prototypes.</span></>}
+              subtitle="Our current equipment for FDM 3D printing and diode laser work."
             />
             <ul className="grid gap-3">
               {equipment.map((e) => (
@@ -100,45 +78,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
         <SectionHeading
-          kicker="The humans"
-          title={<>Small team. <br /><span className="text-orange">Big print queue.</span></>}
+          kicker="Service area"
+          title={<>Local delivery. <br /><span className="text-orange">India-wide shipping.</span></>}
+          subtitle="Local delivery across Ghaziabad, Noida, Greater Noida, and Delhi NCR. Shipping across India."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { name: "Founder", role: "Studio lead · DFM / SLS", tone: "yellow" as const },
-            { name: "Co-founder", role: "Materials · SLA / FDM", tone: "mint" as const },
-            { name: "You?", role: "We're hiring an apprentice", tone: "orange" as const },
-          ].map((m) => (
-            <article key={m.role} className="brut-card !p-0 overflow-hidden">
-              <ImagePlaceholder
-                tone={m.tone}
-                pattern="iso"
-                label="HEADSHOT"
-                caption={m.name}
-                aspect="aspect-[4/5]"
-                className="!border-0 !shadow-none"
-              />
-              <div className="border-t-[3px] border-ink bg-paper px-4 py-3">
-                <div className="font-display text-lg font-extrabold leading-tight">{m.name}</div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">{m.role}</div>
-              </div>
-            </article>
-          ))}
-        </div>
       </section>
 
       {/* CTA */}
       <section className="border-y-[3px] border-ink bg-orange py-16 md:py-24">
         <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 px-5 md:flex-row md:items-center md:justify-between md:px-8">
           <h2 className="font-display text-4xl font-extrabold leading-[0.95] text-paper md:text-6xl">
-            Want to see the studio?
+            Have a file or sketch?
           </h2>
           <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="brut-btn brut-btn--dark">Book a visit →</Link>
-            <Link href="/gallery" className="brut-btn brut-btn--ghost">See recent prints</Link>
+            <Link href="/contact" className="brut-btn brut-btn--dark">Get a quote →</Link>
+            <Link href="/gallery" className="brut-btn brut-btn--ghost">View project photos</Link>
           </div>
         </div>
       </section>

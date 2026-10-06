@@ -1,11 +1,12 @@
-# JP 3D Prints — website
+# Extrudia — website
 
-Neobrutalist Next.js marketing site for a small 3D printing & prototyping studio. App Router, Tailwind v4, no design-system dependencies — the look is built from CSS variables and three Google Fonts.
+Neobrutalist Next.js site for Extrudia, a rapid prototyping studio in Sahibabad, Ghaziabad. App Router, Tailwind v4, no design-system dependencies — the look is built from CSS variables and three Google Fonts.
 
 ```
-app/            App Router pages (home, services, gallery, about, contact, api/newsletter)
+app/            App Router pages (home, services, gallery, about, contact, privacy, terms, api/newsletter)
 components/    Reusable UI: Nav, Footer, NewsletterForm, ContactForm, ImagePlaceholder…
-lib/data.ts    Services / process / projects / FAQ / stats (edit these — see below)
+lib/data.ts    Services, process, and project photo slots
+lib/config.ts  Shared phone placeholder and generated phone/WhatsApp links
 app/globals.css Design tokens, brut-* component classes, background patterns
 ```
 
@@ -33,10 +34,11 @@ The Brevo key is server-only (no `NEXT_PUBLIC_` prefix) — it lives in `app/api
 
 ## Replacing placeholders
 
-- **Images** — every image on the site is a `<ImagePlaceholder>` component. Drop in real photos by replacing them with `<Image>` from `next/image` (no layout changes needed; the parent card handles the border/shadow).
-- **Studio details** — phone, address, hours, social: search the codebase for `hello@jp3dprints.com`, `123 Maker Lane`, `(000)` and replace.
-- **Service specs** — `lib/data.ts` holds the machine specs, materials and FAQs. Update those to match your actual fleet.
-- **Pricing tiers** — `app/services/page.tsx`, the `tiers` array.
+- **Gallery** — add images under `public/gallery/`, then set `src` and descriptive `alt` values in the `projects` array in `lib/data.ts`.
+- **Phone and WhatsApp** — replace the `TODO` value in `lib/config.ts` with the business number in international format.
+- **Laser limits** — confirm work area and maximum material thickness where marked TODO.
+- **Build volume** — confirm the printer build volume where marked TODO before publishing.
+- **Legal pages and founder story** — complete the visible TODOs before publishing.
 
 ## Design system
 

@@ -1,190 +1,130 @@
-export type PrintTech = {
-  id: "fdm" | "sla" | "sls";
+export type Service = {
+  id: "printing" | "prototyping" | "laser" | "design";
   code: string;
   name: string;
   tagline: string;
   description: string;
-  highlights: string[];
-  specs: { label: string; value: string }[];
-  materials: string[];
-  useCases: string[];
-  tone: "yellow" | "orange" | "mint";
+  details: string[];
+  tone: "yellow" | "orange" | "mint" | "blue";
 };
 
-// NOTE: Numbers below reflect typical capabilities for the listed machines.
-// Replace with your studio's actual hardware before going live.
-export const techs: PrintTech[] = [
+export const fdmMaterials = ["PLA", "PETG", "ABS", "TPU", "Nylon", "PLA-CF", "PETG-CF"];
+
+export const services: Service[] = [
   {
-    id: "fdm",
-    code: "001 · FDM",
-    name: "Fused Deposition Modeling",
-    tagline: "Workhorse for functional prototypes and large parts.",
-    description:
-      "Molten thermoplastic, deposited layer by layer. The right call when you need strong, affordable parts in everyday engineering plastics — fast.",
-    highlights: [
-      "Build volume up to 300 × 300 × 600 mm",
-      "Layer height 0.1 – 0.3 mm",
-      "Engineering plastics (PETG, PA, PC) supported",
-    ],
-    specs: [
-      { label: "Build volume", value: "300 × 300 × 600 mm" },
-      { label: "Layer height", value: "0.1 – 0.3 mm" },
-      { label: "Tolerance", value: "± 0.2 mm" },
-      { label: "Lead time", value: "From 48 hours" },
-    ],
-    materials: ["PLA", "PETG", "ABS", "ASA", "Nylon (PA)", "PC", "TPU 95A"],
-    useCases: [
-      "Functional prototypes",
-      "Jigs & fixtures",
-      "Cosplay / props",
-      "Architectural models",
-      "Replacement parts",
+    id: "printing",
+    code: "01 · FDM",
+    name: "3D Printing (FDM)",
+    tagline: "Functional parts and early prototypes.",
+    description: "FDM 3D printing on a Bambu Lab P2S.",
+    details: [
+      "Build volume up to 256 × 256 × 256 mm (TODO: confirm).",
+      `Materials: ${fdmMaterials.join(", ")}.`,
+      "CF filaments suit stiff, functional parts.",
     ],
     tone: "yellow",
   },
   {
-    id: "sla",
-    code: "002 · SLA",
-    name: "Stereolithography / Resin",
-    tagline: "Sharp detail, surgical finish, dental-grade tolerances.",
-    description:
-      "Photopolymer resin cured by laser. Pick this when the part has to look like the render — smooth surfaces, tiny features, microscopic layer lines.",
-    highlights: [
-      "Layer heights down to 25 microns",
-      "Castable, tough, flexible & bio-compatible resins",
-      "Surface finish ready to paint",
-    ],
-    specs: [
-      { label: "Build volume", value: "192 × 120 × 245 mm" },
-      { label: "Layer height", value: "0.025 – 0.1 mm" },
-      { label: "Tolerance", value: "± 0.1 mm" },
-      { label: "Lead time", value: "From 72 hours" },
-    ],
-    materials: ["Standard Clear", "Tough 2000", "Flexible 80A", "Castable Wax", "High Temp", "Dental LT"],
-    useCases: [
-      "Jewelry masters",
-      "Dental & medical models",
-      "Miniatures & figurines",
-      "Optical components",
-      "Show-quality prototypes",
-    ],
+    id: "prototyping",
+    code: "02 · PROTOTYPING",
+    name: "Rapid Prototyping",
+    tagline: "Move from idea to testable object.",
+    description: "Prototype iterations to help evaluate form, fit, and function.",
+    details: ["Share a file or sketch to get started.", "Larger or multi-part jobs are confirmed in your quote."],
     tone: "orange",
   },
   {
-    id: "sls",
-    code: "003 · SLS",
-    name: "Selective Laser Sintering / Nylon",
-    tagline: "Production-grade nylon parts. No supports, no apologies.",
-    description:
-      "Nylon powder sintered by laser. The closest a printed part gets to an injection-molded one — isotropic strength, complex geometry, batchable.",
-    highlights: [
-      "Isotropic mechanical properties",
-      "Complex geometries without support material",
-      "Production-ready surface and durability",
-    ],
-    specs: [
-      { label: "Build volume", value: "165 × 165 × 300 mm" },
-      { label: "Layer height", value: "0.1 mm" },
-      { label: "Tolerance", value: "± 0.3 mm" },
-      { label: "Lead time", value: "From 5 days" },
-    ],
-    materials: ["PA12 Nylon", "PA11 Nylon", "PA12 Glass-Filled", "TPU 70A"],
-    useCases: [
-      "Low-volume production",
-      "Living hinges & snaps",
-      "Drone & RC parts",
-      "End-use enclosures",
-      "Lattice / generative geometry",
+    id: "laser",
+    code: "03 · LASER",
+    name: "Laser Cutting & Engraving",
+    tagline: "Cut sheet materials and mark metal surfaces.",
+    description: "Two Trees TTS-20 Pro diode laser.",
+    details: [
+      "Cutting: wood and opaque acrylic.",
+      "Metal engraving and marking only; no metal cutting.",
+      "Work area and maximum thickness: TODO.",
     ],
     tone: "mint",
+  },
+  {
+    id: "design",
+    code: "04 · DESIGN",
+    name: "Product & CAD Design",
+    tagline: "Turn a sketch into a print-ready model.",
+    description: "Design support for ideas that need to become physical prototypes.",
+    details: ["Sketch-to-print-ready 3D model.", "Design for manufacturability.", "Prototype iterations."],
+    tone: "blue",
   },
 ];
 
 export const processSteps = [
   {
     n: "01",
-    title: "Upload your file",
-    body: "STL, STEP, OBJ, 3MF — drop it in or share a link. We accept basically anything CAD spits out.",
+    title: "Upload a file or sketch",
+    body: "Share a supported 3D or vector file, a link, or a sketch to start your project.",
   },
   {
     n: "02",
     title: "Get a quote in 24h",
-    body: "We review feasibility, suggest the right process & material, and send a fixed price with a delivery date.",
+    body: "We review your brief and send a quote within 24 hours.",
   },
   {
     n: "03",
-    title: "We print & QC",
-    body: "Your part goes onto the right machine, gets inspected, post-processed and packed.",
+    title: "We print/cut and check quality",
+    body: "We make your prototype using the quoted process and check it before dispatch.",
   },
   {
     n: "04",
-    title: "Ship or pickup",
-    body: "Tracked shipping anywhere, or come by the studio and watch the last layer go down.",
+    title: "Delivery or shipping",
+    body: "Delivery across Delhi NCR and tracked shipping across India.",
   },
 ];
 
 export const whyUs = [
   {
-    icon: "calipers",
-    title: "Engineer-grade tolerances",
-    body: "Every order is inspected with calipers and a checklist before it leaves the studio. No surprises.",
+    icon: "people",
+    title: "Personal attention",
+    body: "A small prototyping studio gives your brief direct attention.",
   },
   {
     icon: "clock",
-    title: "Built for speed",
-    body: "FDM prototypes in 48 hours, resin masters in 72, nylon production runs in under a week.",
+    title: "Fast quotes",
+    body: "Get a quote within 24 hours. Most small FDM prints ship in about 2 days; larger jobs are confirmed in your quote.",
   },
   {
-    icon: "stack",
-    title: "Three processes, one studio",
-    body: "FDM, SLA and SLS under one roof. We'll pick the right one for the part instead of forcing yours into ours.",
+    icon: "materials",
+    title: "Material advice",
+    body: "Get help choosing from the available FDM filaments for your prototype.",
   },
   {
-    icon: "leaf",
-    title: "Lower-waste workflow",
-    body: "Resin reclaim, powder recycling, and we'll take back PLA scrap to grind back into filament.",
+    icon: "design",
+    title: "Design help",
+    body: "Get support with CAD design, design for manufacturability, and prototype iterations.",
   },
 ];
 
-export const projects = [
-  { title: "Drone arm v3", category: "SLS · PA12", caption: "Topology-optimized carrier for a quad" },
-  { title: "Brand-loyalty mug", category: "SLA · Standard", caption: "Mascot maquette for a coffee shop" },
-  { title: "Robot gripper", category: "FDM · PETG", caption: "Custom finger plates, batch of 12" },
-  { title: "Lamp shade", category: "FDM · PLA", caption: "Generative lattice, 480 mm tall" },
-  { title: "Dental aligner model", category: "SLA · Dental LT", caption: "Clear arch for a partner clinic" },
-  { title: "Bike pedal cleat", category: "SLS · PA12-GF", caption: "Reinforced for repeated load" },
-];
+export type ProjectImage = {
+  src?: string;
+  alt: string;
+  category: "Prints" | "Design";
+  material?: string;
+};
 
-export const faqs = [
-  {
-    q: "What file formats do you accept?",
-    a: "STL, STEP/STP, OBJ, 3MF and SLDPRT. STEP is preferred for engineering parts because it preserves units and features.",
-  },
-  {
-    q: "How much does a print cost?",
-    a: "Cost is driven by volume, material and process. A small FDM bracket can be under $15, while a large multi-part nylon assembly may run several hundred. Upload your file for a fixed quote in 24 hours.",
-  },
-  {
-    q: "Do you sign NDAs?",
-    a: "Yes. Mutual NDAs are routine — send us yours or use ours. All files are stored in a private, access-controlled workspace.",
-  },
-  {
-    q: "Can you help me design the part?",
-    a: "Absolutely. We do DFM reviews on every quote, and offer paid design support if you only have a sketch or a problem to solve.",
-  },
-  {
-    q: "What about painting, dyeing, or assembly?",
-    a: "We post-process in-house: sanding, vapor smoothing (ABS), bead blasting (SLS), dyeing (nylon), priming, and painting. Multi-part assemblies welcome.",
-  },
-  {
-    q: "Do you ship internationally?",
-    a: "Yes — via DHL or UPS. Customs paperwork is handled on our end; delivery is typically 2–5 business days.",
-  },
-];
-
-export const stats = [
-  { value: "48h", label: "Prototype lead time" },
-  { value: "30+", label: "Materials in stock" },
-  { value: "1.2k", label: "Parts printed in 2025" },
-  { value: "± 0.1mm", label: "Best tolerance" },
+// TODO: Add project photos under /public/gallery/ and set each src to /gallery/<filename>.
+export const projects: ProjectImage[] = [
+  { alt: "3D print project photo slot 01", category: "Prints" },
+  { alt: "3D print project photo slot 02", category: "Prints" },
+  { alt: "3D print project photo slot 03", category: "Prints" },
+  { alt: "3D print project photo slot 04", category: "Prints" },
+  { alt: "3D print project photo slot 05", category: "Prints" },
+  { alt: "3D print project photo slot 06", category: "Prints" },
+  { alt: "3D print project photo slot 07", category: "Prints" },
+  { alt: "3D print project photo slot 08", category: "Prints" },
+  { alt: "3D print project photo slot 09", category: "Prints" },
+  { alt: "3D print project photo slot 10", category: "Prints" },
+  { alt: "3D print project photo slot 11", category: "Prints" },
+  { alt: "3D print project photo slot 12", category: "Prints" },
+  { alt: "Product and CAD design project photo slot 01", category: "Design" },
+  { alt: "Product and CAD design project photo slot 02", category: "Design" },
+  { alt: "Product and CAD design project photo slot 03", category: "Design" },
 ];

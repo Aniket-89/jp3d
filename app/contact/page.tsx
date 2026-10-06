@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import { PHONE, phoneHref, whatsappUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "Contact — JP 3D Prints",
-  description: "Start a project. Send us a CAD file, a sketch, or just a problem. We reply within one working day.",
+  title: "Contact — Extrudia",
+  description: "Get a quote for 3D printing, rapid prototyping, laser cutting, or product design in Sahibabad, Ghaziabad.",
 };
-
-const info = [
-  { label: "Email", value: "hello@jp3dprints.com", href: "mailto:hello@jp3dprints.com" },
-  { label: "Phone", value: "+1 (000) 000-0000", href: "tel:+10000000000" },
-  { label: "Studio", value: "123 Maker Lane · Unit 04 · Anywhere, EARTH" },
-  { label: "Hours", value: "Mon – Fri · 09:00 – 18:00" },
-];
 
 export default function ContactPage() {
   return (
@@ -26,7 +20,7 @@ export default function ContactPage() {
             <span className="text-orange">We're listening.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink-soft">
-            The more we know upfront, the tighter the quote. Send a CAD file, a sketch, a Pinterest link, or just describe what you're trying to build — we'll take it from there.
+            Send a file or sketch for 3D printing, rapid prototyping, laser cutting, or product design. Quote within 24 hours.
           </p>
         </div>
       </header>
@@ -57,25 +51,30 @@ export default function ContactPage() {
             </div>
 
             <dl className="brut-card divide-y-2 divide-ink p-0">
-              {info.map((row) => (
-                <div key={row.label} className="flex flex-col gap-1 p-5">
-                  <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">{row.label}</dt>
-                  <dd className="font-display text-lg font-bold leading-snug">
-                    {row.href ? (
-                      <a href={row.href} className="underline-offset-4 hover:underline">{row.value}</a>
-                    ) : (
-                      row.value
-                    )}
-                  </dd>
-                </div>
-              ))}
+              <div className="flex flex-col gap-1 p-5">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Email</dt>
+                <dd className="font-display text-lg font-bold leading-snug"><a href="mailto:hello.extrudia@gmail.com" className="underline-offset-4 hover:underline">hello.extrudia@gmail.com</a></dd>
+              </div>
+              <div className="flex flex-col gap-1 p-5">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Phone / WhatsApp</dt>
+                <dd className="font-display text-lg font-bold leading-snug">{phoneHref ? <a href={phoneHref}>{PHONE}</a> : "TODO"}</dd>
+              </div>
+              <div className="flex flex-col gap-1 p-5">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Location</dt>
+                <dd className="font-display text-lg font-bold leading-snug">Sahibabad, Ghaziabad, UP, India</dd>
+              </div>
+              <div className="flex flex-col gap-1 p-5">
+                <dt className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">Service area</dt>
+                <dd className="text-sm">Local delivery across Ghaziabad, Noida, Greater Noida, and Delhi NCR. Shipping across India.</dd>
+              </div>
             </dl>
 
             <div className="brut-card !bg-mint p-6">
-              <p className="font-mono text-xs uppercase tracking-widest">// sla</p>
+              <p className="font-mono text-xs uppercase tracking-widest">// quick contact</p>
               <p className="mt-2 font-display text-2xl font-extrabold leading-tight">
-                We reply within <span className="bg-paper px-1">1 working day.</span>
+                Most small FDM prints ship in about 2 days; larger jobs confirmed in your quote.
               </p>
+              {whatsappUrl && <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="brut-btn mt-4">WhatsApp</a>}
             </div>
           </aside>
         </div>

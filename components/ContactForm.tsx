@@ -1,18 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { fdmMaterials } from "@/lib/data";
 
 type Status = "idle" | "loading" | "ok" | "error";
 
-const PROCESSES = [
-  "Not sure yet — help me pick",
-  "FDM — engineering plastics",
-  "SLA — resin / fine detail",
-  "SLS — nylon production",
-  "Multi-process / assembly",
+const SERVICES = [
+  "3D Printing (FDM)",
+  "Rapid Prototyping",
+  "Laser Cutting & Engraving",
+  "Product & CAD Design",
 ] as const;
-
-const QUANTITIES = ["1", "2 – 10", "11 – 50", "51 – 200", "200+"] as const;
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -40,11 +38,11 @@ export default function ContactForm() {
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
         throw new Error(
-          json?.errors?.[0]?.message || "Couldn't send. Please email hello@jp3dprints.com directly."
+          json?.errors?.[0]?.message || "Couldn't send. Please email hello.extrudia@gmail.com directly."
         );
       }
       setStatus("ok");
-      setMessage("Thanks — we'll get back to you within one working day.");
+      setMessage("Thanks — we'll send a quote within 24 hours.");
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -66,50 +64,58 @@ export default function ContactForm() {
         </Field>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field id="company" label="Company (optional)">
-          <input id="company" name="company" className="brut-input" placeholder="Anvil Robotics" />
-        </Field>
-        <Field id="phone" label="Phone (optional)">
-          <input id="phone" type="tel" name="phone" className="brut-input" placeholder="+1 (000) 000-0000" />
-        </Field>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field id="process" label="Process">
-          <select id="process" name="process" className="brut-input">
-            {PROCESSES.map((p) => <option key={p}>{p}</option>)}
-          </select>
-        </Field>
-        <Field id="quantity" label="Quantity">
-          <select id="quantity" name="quantity" className="brut-input">
-            {QUANTITIES.map((q) => <option key={q}>{q}</option>)}
-          </select>
-        </Field>
-      </div>
-
-      <Field id="deadline" label="When do you need it?">
-        <input id="deadline" name="deadline" className="brut-input" placeholder="ASAP / next Friday / no rush" />
+      <Field id="phone" label="Phone">
+        <input id="phone" type="tel" name="phone" className="brut-input" placeholder="Your phone number" />
       </Field>
 
-      <Field id="message" label="Project brief" required>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field id="service" label="Service type">
+          <select id="service" name="service" className="brut-input">
+            {SERVICES.map((service) => <option key={service}>{service}</option>)}
+          </select>
+        </Field>
+        <Field id="material" label="Material (if known)">
+          <select id="material" name="material" className="brut-input">
+            <option value="">Not sure yet</option>
+            {fdmMaterials.map((material) => <option key={material}>{material}</option>)}
+            <option>Wood</option>
+            <option>Acrylic</option>
+            <option>Metal engraving</option>
+            <option>Not applicable</option>
+          </select>
+        </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field id="quantity" label="Quantity">
+          <input id="quantity" name="quantity" type="number" min="1" className="brut-input" placeholder="Number of items" />
+        </Field>
+        <Field id="deadline" label="Deadline">
+          <input id="deadline" name="deadline" type="date" className="brut-input" />
+        </Field>
+      </div>
+
+      <Field id="file-link" label="File link (optional)">
+        <input id="file-link" name="file-link" type="url" className="brut-input" placeholder="Link to your file" />
+      </Field>
+
+      <Field id="notes" label="Notes">
         <textarea
-          id="message"
-          name="message"
-          required
+          id="notes"
+          name="notes"
           rows={6}
           className="brut-input resize-y"
-          placeholder="What are you making? Any dimensions, materials, finishes, or things you want us to know? Drop links to CAD files if you have them."
+          placeholder="Share dimensions, requirements, or any other project details."
         />
       </Field>
 
-      <Field id="files" label="CAD files (optional, ≤ 10MB each)">
-        <input id="files" type="file" name="files" multiple className="brut-input file:mr-3 file:border-2 file:border-ink file:bg-yellow file:px-3 file:py-1 file:font-bold file:uppercase" />
+      <Field id="files" label="Upload files (STL, STEP, OBJ, 3MF, DXF, SVG)">
+        <input id="files" type="file" name="files" multiple accept=".stl,.step,.stp,.obj,.3mf,.dxf,.svg" className="brut-input file:mr-3 file:border-2 file:border-ink file:bg-yellow file:px-3 file:py-1 file:font-bold file:uppercase" />
       </Field>
 
       <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
         <p className="font-mono text-xs uppercase tracking-widest text-ink-soft">
-          // We reply within 1 working day · NDA available on request
+          // Quote within 24 hours · Delivery and shipping only
         </p>
         <button type="submit" disabled={status === "loading"} className="brut-btn brut-btn--orange">
           {status === "loading" ? "Sending…" : "Send brief →"}
